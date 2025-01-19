@@ -1,35 +1,37 @@
 package org.example.graphTravelers.adapter;
 
-import edu.uci.ics.jung.graph.SparseMultigraph;
+import org.jgrapht.graph.DefaultDirectedGraph;
+import org.jgrapht.graph.DefaultEdge;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class SparseMultigraphAdapter<V, E> implements GraphAdapter<V, E> {
 
-    private final SparseMultigraph<V, E> sparseMultigraph;
-
-    public SparseMultigraphAdapter(SparseMultigraph<V, E> sparseMultigraph) {
-        this.sparseMultigraph = sparseMultigraph;
-    }
+    private final DefaultDirectedGraph<V, DefaultEdge> graph;
 
     public SparseMultigraphAdapter() {
-        this.sparseMultigraph = new SparseMultigraph<>();
+        this.graph = new DefaultDirectedGraph<>(DefaultEdge.class);
     }
 
     @Override
     public void addVertex(V vertex) {
-        this.sparseMultigraph.addVertex(vertex);
+        this.graph.addVertex(vertex);
     }
 
     @Override
     public void addEdge(E edge, V sourceVertex, V targetVertex) {
-        this.sparseMultigraph.addEdge(edge, sourceVertex, targetVertex);
+        this.graph.addEdge(sourceVertex, targetVertex);
     }
 
     @Override
     public Set<V> getNeighbors(V vertex) {
-        return new HashSet<>(this.sparseMultigraph.getNeighbors(vertex));
+        Set<V> neighbors = new HashSet<>();
+        for (V target : graph.vertexSet()) {
+            if (graph.containsEdge(vertex, target)) {
+                neighbors.add(target);
+            }
+        }
+        return neighbors;
     }
-
 }

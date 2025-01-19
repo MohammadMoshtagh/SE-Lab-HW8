@@ -1,6 +1,5 @@
 package org.example.graphTravelers;
 
-import edu.uci.ics.jung.graph.SparseMultigraph;
 import org.example.graphTravelers.adapter.GraphAdapter;
 
 import java.util.*;
