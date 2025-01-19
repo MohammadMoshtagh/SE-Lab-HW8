@@ -1,9 +1,9 @@
 package org.example;
 
-import edu.uci.ics.jung.graph.SparseMultigraph;
 import org.example.graphTravelers.BfsGraphTraverser;
 import org.example.graphTravelers.DfsGraphTraverser;
 import org.example.graphTravelers.Traverser;
+import org.example.graphTravelers.adapter.SparseMultigraphAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         // Create a graph
-        SparseMultigraph<Integer,String> graph = new SparseMultigraph<>();
+        SparseMultigraphAdapter<Integer,String> graph = new SparseMultigraphAdapter<>();
 
         // Add vertices (using Integer nodes)
         graph.addVertex(1);
@@ -37,7 +37,5 @@ public class Main {
 
         System.out.println("Graph-DFS From node 1 is : " + dfsPath);
         System.out.println("Graph-BFS From node 1 is : " + bfsTraveler);
-
-
     }
 }
